@@ -78,6 +78,28 @@ def main():
             print("no new version found!")
             return 0
 
+import openpyxl
+
+def get_conditional_formatting_result(cell):
+  """Returns the Excel conditional formatting result for the specified cell."""
+  sheet = cell.sheet
+  rule = sheet.conditional_formatting.get_rules_for_cell(cell.coordinate)
+  if not rule:
+    return None
+  else:
+    return rule.dxf.format.background.color
+
+def main():
+  workbook = openpyxl.load_workbook('example.xlsx')
+  sheet = workbook.active
+  for row in sheet.iter_rows():
+    for cell in row:
+      result = get_conditional_formatting_result(cell)
+      if result:
+        print(f'Cell {cell.coordinate} is {result}')
+
+if __name__ == '__main__':
+  main()
 
 if __name__ == "__main__":
     main()
