@@ -3,3 +3,45 @@ So I wrote a script to upadte the selenium Driver.
 
 
 The default driver path will be your desktop.
+
+
+import multiprocessing
+import time
+
+# Function to calculate the square of a number
+def square(n):
+    return n * n
+
+# Sequential version of the function
+def sequential_square(numbers):
+    results = []
+    for num in numbers:
+        results.append(square(num))
+    return results
+
+# Parallel version of the function using multiprocessing
+def parallel_square(numbers):
+    with multiprocessing.Pool(processes=multiprocessing.cpu_count()) as pool:
+        results = pool.map(square, numbers)
+    return results
+
+if __name__ == "__main__":
+    # Generate a list of numbers
+    numbers = list(range(1, 10001))
+
+    # Measure time taken by sequential execution
+    start_time = time.time()
+    sequential_result = sequential_square(numbers)
+    sequential_time = time.time() - start_time
+
+    # Measure time taken by parallel execution
+    start_time = time.time()
+    parallel_result = parallel_square(numbers)
+    parallel_time = time.time() - start_time
+
+    # Compare results and execution times
+    print(f"Sequential result (first 10 elements): {sequential_result[:10]}")
+    print(f"Parallel result (first 10 elements): {parallel_result[:10]}")
+    print(f"Sequential execution time: {sequential_time:.4f} seconds")
+    print(f"Parallel execution time: {parallel_time:.4f} seconds")
+
