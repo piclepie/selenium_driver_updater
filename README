@@ -1,6 +1,6 @@
 I've tried some selenium driver update tools, but it does not exactly match the current version of my Chrome. 
 So I wrote a script to upadte the selenium Driver.
-
+r"[^a-zA-Z0-9!#$%&'*+-/=?^_`{|}~.@]"
 
 The default driver path will be your desktop.
 
